@@ -120,7 +120,7 @@ func (s *Scanner) scanWindow(
 				slog.DebugContext(ctx, "failed to decode payload", "mac", mac, "error", err)
 				continue
 			}
-			slog.InfoContext(ctx, "metrics decoded", attrs(d, r)...)
+			slog.DebugContext(ctx, "metrics decoded", attrs(d, r)...)
 			onReading(devicescanner.Device{Name: d.Name, Mac: d.Mac}, r)
 		}
 	})

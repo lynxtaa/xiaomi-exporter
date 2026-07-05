@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/lynxtaa/xiaomi-exporter/internal/application"
+	"github.com/lynxtaa/xiaomi-exporter/internal/httplog"
 	"github.com/lynxtaa/xiaomi-exporter/internal/metrics"
 	"github.com/lynxtaa/xiaomi-exporter/internal/reqid"
 )
@@ -31,6 +32,7 @@ func NewServer(application *application.App) *Server {
 // Handler returns the HTTP Handler with middleware applied.
 func (s *Server) Handler() http.Handler {
 	handler := http.Handler(s.mux)
+	handler = httplog.Middleware(handler)
 	handler = reqid.Middleware(handler)
 
 	return handler
